@@ -12,6 +12,7 @@ module.exports = {
                 test: /\.js$/,
                 include: path.resolve('./src'),
                 loader: 'babel-loader',
+                query: require('./babelrc.js'), //this is added since we changed the filename
             }
         ],
     }
