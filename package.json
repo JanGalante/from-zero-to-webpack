@@ -1,0 +1,16 @@
+{
+  "name": "from-zero-to-webpack",
+  "version": "1.0.0",
+  "description": "from-zero-to-webpack",
+  "main": "index.js",
+  "dependencies": {
+    "webpack": "^2.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
