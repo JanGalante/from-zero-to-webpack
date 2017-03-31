@@ -5,5 +5,14 @@ module.exports = {
     output: {
         path: path.resolve('./dist'),
         filename: 'bundle.js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                include: path.resolve('./src'),
+                loader: 'babel-loader',
+            }
+        ],
     }
 }
