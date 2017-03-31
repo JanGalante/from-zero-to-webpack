@@ -6,7 +6,9 @@
   "dependencies": {
     "webpack": "^2.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^2.3.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
