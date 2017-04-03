@@ -7,6 +7,7 @@
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "serve": "node ./dist/server.js",
+    "serve:inspect": "node --inspect ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "babel-preset-react": "^6.23.0",
     "babili-webpack-plugin": "0.0.11",
     "cross-env": "^4.0.0",
+    "source-map-support": "^0.4.14",
     "webpack": "^2.3.2",
     "webpack-node-externals": "^1.5.4"
   },

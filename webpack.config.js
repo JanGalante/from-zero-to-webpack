@@ -32,8 +32,8 @@ const clientConfig = {
 const serverConfig = {
     target: 'node',
     externals: [nodeExternals({
-        whitelist: PRODUCTION ? [ 'react', 'react-dom/server' ] : [] // those are specified in node_modules, but we want webpack to minify them
-    }) ], //Exclude node_modules from bundle
+        whitelist: PRODUCTION ? ['react', 'react-dom/server'] : [] // those are specified in node_modules, but we want webpack to minify them
+    })], //Exclude node_modules from bundle
 
     node: {
         __dirname: true //true: sets _dirname to what it was in the source file. ./src/ in our case.
@@ -56,8 +56,14 @@ const serverConfig = {
     },
     plugins: [
         PRODUCTION && new MinifierPlugin(),
-        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }) //minify NODE_ENV constants
-    ].filter(e => e)
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }), //minify NODE_ENV constants
+        new webpack.BannerPlugin({ // plugin that insert code at the top of all the output files
+            banner: 'require("source-map-support").install();', //needed to run the source map plugin for server
+            raw: true,
+            entryOnly: false,
+        }),
+    ].filter(e => e),
+    devtool: 'source-map',
 };
 
 // Notice that both configurations are exported
