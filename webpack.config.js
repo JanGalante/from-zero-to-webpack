@@ -3,6 +3,9 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const createBabelConfig = require('./babelrc');
 
+const PRODUCTION = process.env.NODE_ENV === 'production';
+const MinifierPlugin = webpack.optimize.UglifyJsPlugin;
+
 const clientConfig = {
     entry: path.resolve('./src/index.browser.js'),
     output: {
@@ -15,15 +18,18 @@ const clientConfig = {
                 test: /\.js$/,
                 include: path.resolve('./src'),
                 loader: 'babel-loader',
-                query: createBabelConfig(), //this is added since we changed the filename
+                query: createBabelConfig(),
             }
         ],
-    }
+    },
+    plugins: [
+        PRODUCTION && new MinifierPlugin(),
+    ].filter(e => e),
 };
 
 const serverConfig = {
     target: 'node',
-    externals: [ nodeExternals() ],
+    externals: [nodeExternals()], //Exclede node_modules from bundle
 
     node: {
         __dirname: true //true: sets _dirname to what it was in the source file. ./src/ in our case.
@@ -40,10 +46,13 @@ const serverConfig = {
                 test: /\.js$/,
                 include: path.resolve('./src'),
                 loader: 'babel-loader',
-                query: createBabelConfig({ server:true }), //telling babel to setup for a node server
+                query: createBabelConfig({ server: true }), //telling babel to setup for a node server
             }
         ],
-    }
+    },
+    plugins: [
+        PRODUCTION && new MinifierPlugin(),
+    ].filter(e => e),
 };
 
 // Notice that both configurations are exported
