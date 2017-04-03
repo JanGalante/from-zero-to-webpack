@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const createBabelConfig = require('./babelrc');
 
 const clientConfig = {
     entry: path.resolve('./src/index.browser.js'),
@@ -13,7 +14,7 @@ const clientConfig = {
                 test: /\.js$/,
                 include: path.resolve('./src'),
                 loader: 'babel-loader',
-                query: require('./babelrc.js'), //this is added since we changed the filename
+                query: createBabelConfig(), //this is added since we changed the filename
             }
         ],
     }
@@ -37,7 +38,7 @@ const serverConfig = {
                 test: /\.js$/,
                 include: path.resolve('./src'),
                 loader: 'babel-loader',
-                query: require('./babelrc.js'), //this is added since we changed the filename
+                query: createBabelConfig({ server:true }), //telling babel to setup for a node server
             }
         ],
     }
