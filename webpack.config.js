@@ -26,6 +26,7 @@ const clientConfig = {
         PRODUCTION && new MinifierPlugin(),
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }) //minify NODE_ENV constants
     ].filter(e => e),
+    devtool: PRODUCTION ? 'source-map' : 'cheap-module-eval-source-map',
 };
 
 const serverConfig = {
