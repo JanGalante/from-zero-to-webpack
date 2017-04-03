@@ -31,7 +31,7 @@ const clientConfig = {
 const serverConfig = {
     target: 'node',
     externals: [nodeExternals({
-        whitelist: PRODUCTION ? [ 'react', 'react-dom/server' ] : [] // those are specified in node_modules, but in resolve.alias config we want to use them
+        whitelist: PRODUCTION ? [ 'react', 'react-dom/server' ] : [] // those are specified in node_modules, but we want webpack to minify them
     }) ], //Exclude node_modules from bundle
 
     node: {
@@ -56,13 +56,7 @@ const serverConfig = {
     plugins: [
         PRODUCTION && new MinifierPlugin(),
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }) //minify NODE_ENV constants
-    ].filter(e => e),
-    resolve: {
-        alias: PRODUCTION ? {
-            'react': 'react/dist/react.min.js',
-            'react-dom/server': 'react-dom/dist/react-dom-server.min.js',
-        } : {},
-    }
+    ].filter(e => e)
 };
 
 // Notice that both configurations are exported
