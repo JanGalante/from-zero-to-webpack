@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 const createBabelConfig = require('./babelrc');
 
 const clientConfig = {
@@ -22,6 +23,7 @@ const clientConfig = {
 
 const serverConfig = {
     target: 'node',
+    externals: [ nodeExternals() ],
 
     node: {
         __dirname: true //true: sets _dirname to what it was in the source file. ./src/ in our case.
