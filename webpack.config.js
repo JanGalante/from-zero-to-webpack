@@ -4,7 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const createBabelConfig = require('./babelrc');
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
-const MinifierPlugin = webpack.optimize.UglifyJsPlugin;
+const MinifierPlugin = require('babili-webpack-plugin');
 
 const clientConfig = {
     entry: path.resolve('./src/index.browser.js'),
