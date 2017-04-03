@@ -24,12 +24,13 @@ const clientConfig = {
     },
     plugins: [
         PRODUCTION && new MinifierPlugin(),
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }) //minify NODE_ENV constants
     ].filter(e => e),
 };
 
 const serverConfig = {
     target: 'node',
-    externals: [nodeExternals()], //Exclede node_modules from bundle
+    externals: [nodeExternals()], //Exclude node_modules from bundle
 
     node: {
         __dirname: true //true: sets _dirname to what it was in the source file. ./src/ in our case.
@@ -52,6 +53,7 @@ const serverConfig = {
     },
     plugins: [
         PRODUCTION && new MinifierPlugin(),
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }) //minify NODE_ENV constants
     ].filter(e => e),
 };
 
