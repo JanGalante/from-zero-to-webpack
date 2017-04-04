@@ -1,12 +1,16 @@
 import path from 'path';
 import fs from 'fs';
 import express from 'express';
+import PugRoutes from '../routes/index';
 import React from 'react';
 import ReactServer from 'react-dom/server';
 import HelloWorld from './HelloWorld';
 
 const app = express();
 
+app.set('view engine', 'pug');
+
+app.use('/pug', PugRoutes);
 app.use('/static', express.static(path.resolve(__dirname, '../dist')));
 
 app.get('*', (req, res) => {
