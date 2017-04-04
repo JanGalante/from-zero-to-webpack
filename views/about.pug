@@ -1,6 +1,7 @@
-html
-  head
-    title= title
-  body
-    h1= message
-    
+extends layout
+
+block content
+  h1= title
+  p This is the about Pug page.
+  p
+    a.btn.btn-primary(href='/pug', role='button') To section start
