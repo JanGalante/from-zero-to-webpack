@@ -17,7 +17,7 @@ class Shell extends React.Component {
   }
 }
 
-App.propTypes = {
+Shell.propTypes = {
   children: PropTypes.object.isRequired,
 //   loading: PropTypes.bool.isRequired
 };
@@ -28,6 +28,6 @@ App.propTypes = {
 //   };
 // }
 
-// export default connect(mapStateToProps)(App);
+// export default connect(mapStateToProps)(Shell);
 
 export default Shell;

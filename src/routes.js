@@ -7,7 +7,7 @@ import AboutPage from './components/about/AboutPage';
 // import ManageCoursePage from './components/course/ManageCoursePage'; //eslint-disable-line import/no-named-as-default
 
 export default (
-  <Route path="/" component={App}>
+  <Route path="/" component={Shell}>
     <IndexRoute component={HomePage} />
     {/*<Route path="courses" component={CoursesPage} />
     <Route path="course" component={ManageCoursePage} />
