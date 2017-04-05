@@ -1,16 +1,17 @@
 // This component handles the App template used on every page.
 import React, {PropTypes} from 'react';
+import Header from './common/Header'
 // import Header from './common/Header';
 // import {connect} from 'react-redux';
 
 class Shell extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         {/*<Header
           loading={this.props.loading}
         />*/}
-        <p>Header here...</p>
+        <Header />
         {this.props.children}
       </div>
     );

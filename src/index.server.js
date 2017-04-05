@@ -7,23 +7,14 @@ import ReactServer from 'react-dom/server';
 import HelloWorld from './HelloWorld';
 
 // // import from Mammiso & Cory
-import routes from './routes';
+
 
 // // import from Mammiso
 // import { Server } from 'http';
 import { match, RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
+import routes from './routes';
 // import NotFoundPage from './components/NotFoundPage';
-
-// // imports from Cory
-// import configureStore from './store/configureStore';
-// import {Provider} from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-// import {loadCourses} from './actions/courseActions';
-// import {loadAuthors} from './actions/authorActions';
-// import './styles/styles.css'; //Webpack can import CSS files too!
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-// import '../node_modules/toastr/build/toastr.min.css';
 
 
 

@@ -14,12 +14,8 @@ const clientConfig = {
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                include: path.resolve('./src'),
-                loader: 'babel-loader',
-                query: createBabelConfig(),
-            }
+            { test: /\.js$/, loader: 'babel-loader', include: path.resolve('./src'), query: createBabelConfig() }, 
+            // { test: /\.css$/, loader: 'css-loader', /*include: path.resolve('./assets'),*/ query: createBabelConfig() }
         ],
     },
     plugins: [
