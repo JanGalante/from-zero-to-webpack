@@ -12,8 +12,8 @@
 // import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-// import configureStore from './store/configureStore';
-// import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 // import { loadCourses } from './actions/courseActions';
@@ -33,8 +33,13 @@ import routes from './routes';
   document.getElementById('app')
 );*/
 
+
+const store = configureStore(); // if we want we can send initial state here. Nice to have when rendering on server
 render(
-    <Router history={browserHistory} routes={routes} />,
+    // provider wrap the application so we can connect to the redux store
+    <Provider store={store}> 
+        <Router history={browserHistory} routes={routes} />
+    </Provider>,
     document.getElementById('root')
 );
 
