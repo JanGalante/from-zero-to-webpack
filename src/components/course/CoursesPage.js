@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions'; // all exports will be a property on courseActions, like courseActions.createCourse
 // import CourseList from './CourseList';
 // import {browserHistory} from 'react-router';
@@ -34,9 +34,11 @@ class CoursesPage extends React.Component {
     this.setState({ course: course });
   }
 
-  onClickSave(){
+  onClickSave() {
     // alert(`Saving ${this.state.course.title}`);
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    // this.props.dispatch(courseActions.createCourse(this.state.course));
+    // this.props.createCourse(this.state.course);
+    this.props.actions.createCourse(this.state.course);
   }
 
   render() {
@@ -69,29 +71,40 @@ class CoursesPage extends React.Component {
 
 // validation
 CoursesPage.propTypes = {
-  // courses: PropTypes.array.isRequired,
-  // actions: PropTypes.object.isRequired
-  dispatch: PropTypes.func.isRequired,
-  courses: PropTypes.array.isRequired
+  courses: PropTypes.array.isRequired,
+  // dispatch: PropTypes.func.isRequired, //connect give you access to the dispatch propterty when not sending the parameter mapDispatchToProps... this.props.dispatch
+  // createCourse: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired, // bindActionCreators returns an object
 };
 
 function mapStateToProps(state, ownProps) {
   // return object with properties that we want to be exposed in our component
+
+  
   return {
     courses: state.courses // state.courses is the property in the root reducer
   };
+
+  //reduc helper function
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(courseActions, dispatch)
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  // manually using dispatch
+  // return {
+  //   createCourse: course => dispatch(courseActions.createCourse(course))
+  // };
+
+  //redux helper function
+  return {
+    // mapping to all actions in courseActions
+    actions: bindActionCreators(courseActions, dispatch)
+  };
+}
 
 
 // export a component that is decorated with the react-reduct connect function
 // components that can inteact with redux... container component
-// export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
 
 // the above is the same as...
 // const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
@@ -99,6 +112,6 @@ function mapStateToProps(state, ownProps) {
 
 // you can skip the mapDispatchToProps
 // then connect give you access to the dispatch propterty... this.props.dispatch
-export default connect(mapStateToProps)(CoursesPage); 
+// export default connect(mapStateToProps)(CoursesPage); 
 
 
