@@ -1,6 +1,8 @@
+import * as types from '../actions/actionTypes';
+
 export default function courseReducer(state = [], action){
     switch (action.type) {
-        case 'CREATE_COURSE':
+        case types.CREATE_COURSE:
             // remeber state is immutable, so dont mutate state
             // state.push(action.course)
             // return state
@@ -10,7 +12,7 @@ export default function courseReducer(state = [], action){
             return [...state, 
                 Object.assign({}, action.course) //create a deep copy
             ]
-    
+            
         default:
             // since we can have multiple reducers handling different actions
             // if this reducer doesn't handel a action we have to return current state

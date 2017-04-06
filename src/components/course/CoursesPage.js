@@ -7,7 +7,8 @@ import * as courseActions from '../../actions/courseActions'; // all exports wil
 
 class CoursesPage extends React.Component {
   constructor(props, context) {
-    // the constructor is a goog place to init state
+    // the constructor is a good place to init state 
+    // and to bind functions to 'this' context
     super(props, context);
     //this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
     this.state = {
@@ -41,6 +42,8 @@ class CoursesPage extends React.Component {
     this.props.actions.createCourse(this.state.course);
   }
 
+  // container components ideally just call child components
+  // and dont contains markup
   render() {
     const { courses } = this.props;
 
@@ -69,7 +72,7 @@ class CoursesPage extends React.Component {
   }
 }
 
-// validation
+// validation for propTypes
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   // dispatch: PropTypes.func.isRequired, //connect give you access to the dispatch propterty when not sending the parameter mapDispatchToProps... this.props.dispatch
