@@ -36,6 +36,7 @@
     "concurrently": "^3.4.0",
     "cross-env": "^4.0.0",
     "nodemon": "^1.11.0",
+    "redux-immutable-state-invariant": "^1.2.3",
     "source-map-support": "^0.4.14",
     "webpack": "^2.3.2",
     "webpack-node-externals": "^1.5.4"
