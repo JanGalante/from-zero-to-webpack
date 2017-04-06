@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 // import {bindActionCreators} from 'redux';
-// import * as courseActions from '../../actions/courseActions';
+import * as courseActions from '../../actions/courseActions'; // all exports will be a property on courseActions, like courseActions.createCourse
 // import CourseList from './CourseList';
 // import {browserHistory} from 'react-router';
 
@@ -35,7 +35,8 @@ class CoursesPage extends React.Component {
   }
 
   onClickSave(){
-    alert(`Saving ${this.state.course.title}`);
+    // alert(`Saving ${this.state.course.title}`);
+    this.props.dispatch(courseActions.createCourse(this.state.course));
   }
 
   render() {
@@ -70,11 +71,12 @@ class CoursesPage extends React.Component {
 //   actions: PropTypes.object.isRequired
 // };
 
-// function mapStateToProps(state, ownProps) {
-//   return {
-//     courses: state.courses
-//   };
-// }
+function mapStateToProps(state, ownProps) {
+  // return object with properties that we want to be exposed in our component
+  return {
+    courses: state.courses // state.courses is the property in the root reducer
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return {
@@ -82,5 +84,17 @@ class CoursesPage extends React.Component {
 //   };
 // }
 
+
+// export a component that is decorated with the react-reduct connect function
+// components that can inteact with redux... container component
 // export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
-export default CoursesPage;
+
+// the above is the same as...
+// const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+// export default connectedStateAndProps(CoursesPage);
+
+// you can skip the mapDispatchToProps
+// then connect give you access to the dispatch propterty... this.props.dispatch
+export default connect(mapStateToProps)(CoursesPage); 
+
+
