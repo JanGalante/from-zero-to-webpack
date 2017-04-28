@@ -1,23 +1,19 @@
 import path from 'path';
 import fs from 'fs';
 import express from 'express';
-import PugRoutes from '../routes/index';
+
+// React And Redux Setup
 import React from 'react';
-import ReactServer from 'react-dom/server';
-import HelloWorld from './HelloWorld';
-
-// // import from Mammiso & Cory
-
-
-// // import from Mammiso
-// import { Server } from 'http';
-import { match, RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
-import routes from './routes';
-// import NotFoundPage from './components/NotFoundPage';
-
 import { Provider } from 'react-redux';
+import { match, RouterContext } from 'react-router';
+
+// Import own modules
+import routes from './routes';
+import PugRoutes from '../routes/index';
 import configureStore from './store/configureStore';
+import HelloWorld from './HelloWorld';
+// import NotFoundPage from './components/NotFoundPage';
 
 
 
@@ -29,13 +25,6 @@ app.use('/pug', PugRoutes);
 // define the folder that will be used for static assets
 app.use('/static', express.static(path.resolve(__dirname, '../dist')));
 
-// universal routing and rendering
-// app.get('*', (req, res) => {
-//   const html = fs.readFileSync(path.resolve(__dirname, './index.html')).toString();
-//   const markup = ReactServer.renderToString(<HelloWorld />); 
-  
-//   res.send(html.replace('$react', markup));
-// });
 
 // Server Side Rendering based on routes matched by React-router.
 app.get('*', (req, res) => {
@@ -55,7 +44,6 @@ app.get('*', (req, res) => {
       let markup;
       if (renderProps) {
         // if the current route matched we have renderProps
-        // markup = renderToString(<RouterContext {...renderProps}/>);
 
         const store = configureStore();
 
@@ -64,9 +52,6 @@ app.get('*', (req, res) => {
             <RouterContext {...renderProps}/>
           </Provider>
         );
-
-        // // markup = renderToString(<HelloWorld />);
-        // // markup = renderToString(<Router history={browserHistory} routes={routes} />);
 
       } else {
         // otherwise we can render a 404 page
