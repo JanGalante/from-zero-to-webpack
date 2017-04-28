@@ -16,6 +16,9 @@ import { renderToString } from 'react-dom/server';
 import routes from './routes';
 // import NotFoundPage from './components/NotFoundPage';
 
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+
 
 
 // initialize the server and configure support for pug templates
@@ -34,10 +37,9 @@ app.use('/static', express.static(path.resolve(__dirname, '../dist')));
 //   res.send(html.replace('$react', markup));
 // });
 
+// Server Side Rendering based on routes matched by React-router.
 app.get('*', (req, res) => {
-  match(
-    { routes, location: req.url },
-    (err, redirectLocation, renderProps) => {
+  match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
 
       // in case of error display the error message
       if (err) {
@@ -53,9 +55,18 @@ app.get('*', (req, res) => {
       let markup;
       if (renderProps) {
         // if the current route matched we have renderProps
-        markup = renderToString(<RouterContext {...renderProps}/>);
-        // markup = renderToString(<HelloWorld />);
-        // markup = renderToString(<Router history={browserHistory} routes={routes} />);
+        // markup = renderToString(<RouterContext {...renderProps}/>);
+
+        const store = configureStore();
+
+        markup = renderToString(
+          <Provider store={store}>
+            <RouterContext {...renderProps}/>
+          </Provider>
+        );
+
+        // // markup = renderToString(<HelloWorld />);
+        // // markup = renderToString(<Router history={browserHistory} routes={routes} />);
 
       } else {
         // otherwise we can render a 404 page
